@@ -4,6 +4,7 @@ import utilities.BrowserUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import utilities.Driver;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class CheckBoxesPage {
 //        String checkBox2Locator = "input[type='checkbox']:nth-of-type(2)";
           String checkBoxesLocator = "input[type='checkbox']";
 
-          WebDriver driver = BrowserUtils.getDriver("chrome");
+          WebDriver driver = Driver.getDriver();
           driver.manage().window().maximize();
           driver.get("http://practice.cybertekschool.com/checkboxes");
 //        driver.findElement(By.cssSelector(checkBox1Locator)).click();

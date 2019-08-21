@@ -1,50 +1,93 @@
 package cybertekPages;
 
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.BrowserUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
+import utilities.ConfigurationReader;
+import utilities.Driver;
 
 public class RegistrationFormPage {
-    public static void main(String[] args) throws Exception {
-        String firstNameLocator = "input[name='firstname']";
-        String lastNameLocator = "input[name='lastname']";
-        String userNameLocator = "input[name='username']";
-        String emailLocator = "input[name='email']";
-        String passwordLocator = "input[name='password']";
-        String phoneNumberLocator = "input[name='phone']";
-        String maleLocator = "input[value='male']";
-        String femaleLocator = "input[value='female']";
-        String otherGenderLocator = "input[value='other']";
-        String birthDayLocator = "input[name='birthday']";
-        String departmentLocator = "select[name='department']";
-        String jobTitleLocator = "select[name='job_title']";
-        String proLanguageCLocator = "#inlineCheckbox1";
-        String proLanguageJavaLocator = "#inlineCheckbox2";
-        String proLanguageJSLocator = "#inlineCheckbox3";
-        String signUpLocator = "#wooden_spoon";
 
-
-        WebDriver driver = BrowserUtils.getDriver("chrome");
-        driver.manage().window().maximize();
-        driver.get("http://practice.cybertekschool.com/registration_form");
-        driver.findElement(By.cssSelector(firstNameLocator)).sendKeys("Gheyret");
-        driver.findElement(By.cssSelector(lastNameLocator)).sendKeys("Tohti");
-        driver.findElement(By.cssSelector(userNameLocator)).sendKeys("gtohti");
-        driver.findElement(By.cssSelector(emailLocator)).sendKeys("example@gmail.com");
-        driver.findElement(By.cssSelector(passwordLocator)).sendKeys("1234abcd");
-        driver.findElement(By.cssSelector(phoneNumberLocator)).sendKeys("123-456-7890");
-        driver.findElement(By.cssSelector(maleLocator)).click();
-        driver.findElement(By.cssSelector(birthDayLocator)).sendKeys("01/01/1970");
-        Select departmentSelect = new Select(driver.findElement(By.cssSelector(departmentLocator)));
-        departmentSelect.selectByVisibleText("MCR");
-        Select jobTitleSelect = new Select(driver.findElement(By.cssSelector(jobTitleLocator)));
-        jobTitleSelect.selectByVisibleText("SDET");
-        driver.findElement(By.cssSelector(signUpLocator)).click();
-
-        Thread.sleep(3000);
-        driver.quit();
-
+    public RegistrationFormPage() {
+        PageFactory.initElements(Driver.getDriver(), this);
     }
+
+    @FindBy(css = "input[name='firstname']")
+    public WebElement firstNameElement;
+
+    @FindBy(css = "input[name='lastname']")
+    public WebElement lastNameElement;
+
+    @FindBy(css = "input[name='username']")
+    public WebElement userNameElement;
+
+    @FindBy(css = "input[name='email']")
+    public WebElement emailElement;
+
+    @FindBy(css = "input[name='password']")
+    public WebElement passwordElement;
+
+    @FindBy(css = "input[name='phone']")
+    public WebElement phoneNumberElement;
+
+    @FindBy(css = "input[value='male']")
+    public WebElement maleElement;
+
+    @FindBy(css = "input[value='female']")
+    public WebElement femaleElement;
+
+    @FindBy(css = "input[value='other']")
+    public WebElement otherGenderElement;
+
+    @FindBy(css = "input[name='birthday']")
+    public WebElement birthDayElement;
+
+    @FindBy(css = "select[name='department']")
+    public WebElement departmentElement;
+
+    @FindBy(css = "select[name='job_title']")
+    public WebElement jobTitleElement;
+
+    @FindBy(css = "#inlineCheckbox1")
+    public WebElement proLanguageCElement;
+
+    @FindBy(css = "#inlineCheckbox2")
+    public WebElement proLanguageJavaElement;
+
+    @FindBy(css = "#inlineCheckbox3")
+    public WebElement proLanguageJSElement;
+
+    @FindBy(css = "#wooden_spoon")
+    public WebElement signUpElement;
+
+    public void login(String username, String password) {
+
+        username = ConfigurationReader.getProperty("tomsmith");
+        password = ConfigurationReader.getProperty("SuperSecretPassword");
+        firstNameElement.sendKeys("John");
+        lastNameElement.sendKeys("Smith");
+        userNameElement.sendKeys("JSmith");
+        emailElement.sendKeys("jsmith@test.com");
+        passwordElement.sendKeys("1234abcd");
+        phoneNumberElement.sendKeys("123-456-7890");
+        maleElement.click();
+        femaleElement.click();
+        otherGenderElement.click();
+        birthDayElement.sendKeys("01/01/1970");
+        Select departmentSelect = new Select(departmentElement);
+        departmentSelect.selectByVisibleText("MCR");
+        Select jobTitleSelect = new Select(jobTitleElement);
+        jobTitleSelect.selectByVisibleText("SDET");
+        signUpElement.click();
+
+       BrowserUtils.waitPlease(2);
+
+
+        }
     }
 
