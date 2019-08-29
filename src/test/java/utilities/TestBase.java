@@ -25,7 +25,7 @@ public class TestBase {
     protected ExtentTest extentLogger;
 
     @BeforeTest
-    public void testSetup(){
+    public void testSetup() {
         //we are creating actual reporter
         report = new ExtentReports();
         //this is path to the report itself
@@ -36,17 +36,20 @@ public class TestBase {
         report.setSystemInfo("OS", System.getProperty("os.name"));
         htmlReporter.config().setDocumentTitle("CyberTek School Practice Page Test Automation");
     }
+
     @BeforeMethod
-    public void setup(){
+    public void setup() {
         driver = Driver.getDriver();
         action = new Actions(driver);
         driver.manage().timeouts().implicitlyWait(Long.valueOf(ConfigurationReader.getProperty("implicitwait")), TimeUnit.SECONDS);
         driver.manage().window().maximize();
         driver.get(ConfigurationReader.getProperty("url"));
+
     }
+
     @AfterMethod
-    public void teardown(ITestResult result){
-        if(ITestResult.FAILURE == result.getStatus()) {
+    public void teardown(ITestResult result) {
+        if (ITestResult.FAILURE == result.getStatus()) {
             //if test failed get a screenshot and save the location to the image
             String pathToTheScreenshot = BrowserUtils.getScreenshot(result.getName());
 
@@ -60,15 +63,15 @@ public class TestBase {
             }
             //to add thrown exception into report
             extentLogger.fail(result.getThrowable());
-        }else if(result.getStatus() == ITestResult.SKIP){
+        } else if (result.getStatus() == ITestResult.SKIP) {
             //if test skipped, this information will appear on the report
-            extentLogger.skip("Test case skipped "+result.getName());
+            extentLogger.skip("Test case skipped " + result.getName());
         }
-        Driver.closeDriver();
+      //  Driver.closeDriver();
     }
 
-    @AfterTest
-    public void tearDownTest(){
-        report.flush();
-    }
+//    @AfterTest
+//    public void tearDownTest() {
+//        driver.quit();
+//    }
 }

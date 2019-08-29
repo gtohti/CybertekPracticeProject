@@ -13,9 +13,8 @@ import utilities.Driver;
 
 public class RegistrationFormPage {
 
-    public RegistrationFormPage() {
-        PageFactory.initElements(Driver.getDriver(), this);
-    }
+    @FindBy(css = "a[href='/registration_form']")
+    public WebElement linkElement;
 
     @FindBy(css = "input[name='firstname']")
     public WebElement firstNameElement;
@@ -65,28 +64,54 @@ public class RegistrationFormPage {
     @FindBy(css = "#wooden_spoon")
     public WebElement signUpElement;
 
-    public void login(String username, String password) {
+    public RegistrationFormPage() {
 
-        username = ConfigurationReader.getProperty("tomsmith");
-        password = ConfigurationReader.getProperty("SuperSecretPassword");
+        PageFactory.initElements(Driver.getDriver(), this);
+    }
+
+    public void registrationFormPage() {
+
+        linkElement.click();
         firstNameElement.sendKeys("John");
+        BrowserUtils.waitPlease(1);
         lastNameElement.sendKeys("Smith");
+        BrowserUtils.waitPlease(1);
         userNameElement.sendKeys("JSmith");
+        BrowserUtils.waitPlease(1);
         emailElement.sendKeys("jsmith@test.com");
+        BrowserUtils.waitPlease(1);
         passwordElement.sendKeys("1234abcd");
+        BrowserUtils.waitPlease(1);
         phoneNumberElement.sendKeys("123-456-7890");
+        BrowserUtils.waitPlease(1);
         maleElement.click();
+        BrowserUtils.waitPlease(1);
         femaleElement.click();
+        BrowserUtils.waitPlease(1);
         otherGenderElement.click();
+        BrowserUtils.waitPlease(1);
         birthDayElement.sendKeys("01/01/1970");
+        BrowserUtils.waitPlease(1);
         Select departmentSelect = new Select(departmentElement);
+        departmentSelect.getAllSelectedOptions();
+
+        BrowserUtils.waitPlease(1);
         departmentSelect.selectByVisibleText("MCR");
+        BrowserUtils.waitPlease(1);
         Select jobTitleSelect = new Select(jobTitleElement);
+        BrowserUtils.waitPlease(1);
         jobTitleSelect.selectByVisibleText("SDET");
+        BrowserUtils.waitPlease(1);
+        BrowserUtils.waitPlease(1);
+        proLanguageCElement.click();
+        BrowserUtils.waitPlease(1);
+        proLanguageJavaElement.click();
+        BrowserUtils.waitPlease(1);
+        proLanguageJSElement.click();
+
         signUpElement.click();
 
        BrowserUtils.waitPlease(2);
-
 
         }
     }
