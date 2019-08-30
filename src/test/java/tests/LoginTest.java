@@ -10,11 +10,8 @@ import utilities.TestBase;
 
 public class LoginTest extends TestBase {
 
-
-
-
   @Test
-  public void loginTest1() {
+  public void verifyLogin() {
 
     LoginPage loginPage = new LoginPage();
 
@@ -33,7 +30,7 @@ public class LoginTest extends TestBase {
   }
 
   @Test
-  public void nagitiveTest() {
+  public void verifyNagitiveLOgin() {
 
       LoginPage loginPage = new LoginPage();
 
